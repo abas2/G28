@@ -13,7 +13,7 @@
 
 	<groupId>EGC</groupId>
 	<artifactId>Frontend-Resultados</artifactId>
-	<version>0.0.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -23,8 +23,8 @@
 	<!-- Indexing information -->
 
 	<name>Frontend-Resultados</name>
-	<url>http://www.Frontend-Resultados.com</url>
-	<description>This is a project template</description>
+	<url>http://www.frontend-resultados.com</url>
+	<description>Agora@US es un sistema software libre ideal para votaciones seguras online donde participan cientos o miles de personas: primarias abiertas, elecciones institucionales, consultas ciudadanas, referéndums. Proveemos soluciones profesionales de innovación democrática</description>
 
 	<!-- Build commands -->
 
