@@ -1,52 +1,38 @@
-<div class= "row">
-<div class = "col-md-2" > 
-
-</div>
-<div class = "col-md-8" >
-	<div class = "col-md-2">
+<div class="row" style="margin-right: 0; margin-left:0">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 text-center" style="padding-top: 15px;">
+			<img src="images/img/agora_house.png" class="img-circle" alt="">
+			<div style="margin-top:50px;margin-bottom:50px;">
+		
+			<b style="font-size:30px">Listado de encuestas</b>
+			<hr style="border: none; height: 1px; color: #333; background-color: #3279b7;">
+		</div>
+		</div>
+		<div class="col-md-2"></div>
 	</div>
-		<div class="col-md-8 text-center" style="padding-top:15px;">
-		<img src="images/img/agora_house.png" class="img-circle" alt="">
+	<div class="col-md-2" style="text-align: center"></div>
+</div>
+
+<div class="row" style="margin-right: 0; margin-left:0">
+	<div class="col-md-2" style="text-align: center;"></div>
+	<div ng-show="params.encuesta == null" class="col-md-8" style="margin-bottom:150px;"  >
+		
+		<div class="wrap">
+			<div ng-repeat="encuesta in encuestas" class="box box1 shadow1">
+				<h3>{{encuesta.nombre}}<br>
+				<hr style="border: none; height: 2px; color: #333; background-color: white;"/>
+				Nº de preguntas:
+				{{encuesta.preguntas.length}}<br><br>
+				<a target="_self"href="resultados/encuestas/ver.do?encuesta={{encuesta.id}}">
+				<img src="http://i709.photobucket.com/albums/ww94/thanchet17t/Arow/116768-matte-blue-and-white-square-icon-arrows-arrow-thick-right.png">
+				</a>
+				</h3>
+				
+			</div>
+
+		</div>
+		<div class="col-md-2"></div>
 	</div>
-	<div class = "col-md-2">
-	</div>
-</div>
-<div class = "col-md-2" style="text-align:center" > 
-
-</div>
-</div>
-	
-<div class= "row">
-<div class = "col-md-3"  style="text-align:center;" > 
-</div>
-<div ng-show="params.encuesta == null" class = "col-md-6" >
-	
-	<table class="table table-responsive table-striped table-hover" style="width:100%">
-		<thead>
-			<tr >
-				<th style="width:20%;text-align: left;">Nombre</th>
-				<th style="width:20%;text-align: center;">Nº de Preguntas</th>
-				<th style="width:80%">
-					<!-- Vacio para que muestre solo el enlace -->
-				</th>
-	
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="encuesta in encuestas" class="primary"  > 
-				<td style="width:20%;text-align: left;" style="background-color:rgb(56, 105, 137)" >{{encuesta.nombre}}</td>
-				<td style="width:20%;text-align: center;" style="background-color:rgb(56, 105, 137)" >{{encuesta.preguntas.length}}</td>
-				<td style="width:80%;text-align: right;"><a style="background-color:rgb(56, 105, 137)" class="btn btn-success" target="_self"href="resultados/encuestas/ver.do?encuesta={{encuesta.id}}">Ver
-						preguntas y resultados</a></td>
-						
-			</tr>
-		</tbody>
-	</table>
- </div>	
- <div class = "col-md-3"> 
-
-</div>
-</div>
-
-
-	
+</div>	
