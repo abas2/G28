@@ -41,14 +41,14 @@ $(function () {
          var cities = Highcharts.geojson(geojson, 'mappoint');
             
 
-       
-
-       
-
 
         // Initiate the chart
         $('#container').highcharts('Map', {
-
+			
+        	 title : {
+                 text : ''
+             },
+             
             mapNavigation: {
                 enabled: true,
                 buttonOptions: {
