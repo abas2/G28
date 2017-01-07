@@ -31,10 +31,10 @@
 		    <v-pane-content ng-repeat-end="">
 		     	 <div id="representacion">
 					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" style="cursor:pointer;" onclick="drawPie(thisd)">Circular</a></li>
+						<li class="active"><a data-toggle="tab" style="cursor:pointer;" onclick="drawPie(this)">Circular</a></li>
 						<li><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawColumn(this)">Columnas</a></li>
-						<li><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawSemiCircle(this)">Semicirculo</a></li>
-						<li><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawPie3d(this)">Circulo 3d</a></li>
+						<li><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawSemiCircle(this)">Semicírculo</a></li>
+						<li><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawPie3d(this)">Círculo 3D</a></li>
 					</ul>
 					<div id="container{{pregunta.id}}"></div>
 				</div>
@@ -61,7 +61,6 @@
 
 		if (idActual != posicion) {
 
-			//[ [ "Si", parseInt(numSi) ], [ "No", parseInt(numNo) ] ]
 			var datos = [];
 
 			idActual = posicion;
