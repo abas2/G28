@@ -26,9 +26,7 @@ public class AngularRestController {
 	private EncuestaService encuestaService;
 
 	@RequestMapping(value = "/encuestas", method = RequestMethod.GET)
-	public @ResponseBody
-	Object encuestas(
-			@RequestParam(value = "encuesta", required = false) Integer encuestaId) {
+	public @ResponseBody Object encuestas(@RequestParam(value = "encuesta", required = false) Integer encuestaId) {
 
 		if (encuestaId == null) {
 			// Nos devuelve todas las encuestas
@@ -49,21 +47,20 @@ public class AngularRestController {
 	private PreguntaService preguntaService;
 
 	@RequestMapping(value = "/mapa")
-	public @ResponseBody
-	Object mapa() {
-		
+	public @ResponseBody Object mapa() {
+
 		List<Tuple> tuplas = new LinkedList<Tuple>();
 		Collection<Pregunta> preguntas;
 		preguntas = preguntaService.findAll();
-		//HashMap<String, Integer> preguntasPorCiudad = new HashMap<>();
+		// HashMap<String, Integer> preguntasPorCiudad = new HashMap<>();
 		for (Pregunta p : preguntas) {
 			String cp = p.getCp();
 			// metodo en el que dado un codigo postal, te dice que ciudad es
 			String ciudad = preguntaService.cpToCiudadString(cp);
-			Tuple tuplaAux=new Tuple(ciudad);
+			Tuple tuplaAux = new Tuple(ciudad);
 			if (tuplas.contains(tuplaAux)) {
 				tuplaAux = tuplas.get(tuplas.indexOf(tuplaAux));
-				tuplaAux.setZ(tuplaAux.getZ()+1);
+				tuplaAux.setZ(tuplaAux.getZ() + 1);
 			} else {
 				tuplaAux.setZ(1);
 				tuplas.add(tuplaAux);
@@ -75,8 +72,7 @@ public class AngularRestController {
 	}
 
 	@RequestMapping(value = "/preguntas/votadas")
-	public @ResponseBody
-	Object preguntasMasVotada() {
+	public @ResponseBody Object preguntasMasVotada() {
 
 		Collection<Pregunta> preguntas;
 		preguntas = preguntaService.findPreguntasMasVotadas();

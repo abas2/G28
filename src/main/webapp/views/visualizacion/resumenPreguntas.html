@@ -11,7 +11,7 @@
 		
 	<div class="col-md-10 text-center" style="padding-top:15px;">
 	
-		<img src="images/img/agora_house.png" class="img-circle" alt="">
+		<img src="images/agora_house.png" class="img-circle" alt="">
 		
 		<div style="margin-top:50px;margin-bottom:50px;">
 			<b style="font-size:22px">Estadísticas generales</b>
@@ -55,12 +55,12 @@
 		  		
 		  		<div id="representacion">
 					<ul class="nav nav-tabs" style="display: inline-flex;">
-						<li class="active"><a data-toggle="tab" style="cursor:pointer;" onclick="drawPie(this)">Circular</a></li>
+						<li class="active"><a data-toggle="tab" style="cursor:pointer;" id="{{encuesta.id}}" onclick="drawPie(this)">Circular</a></li>
 						<li><a data-toggle="tab" style="cursor:pointer;" id="{{encuesta.id}}" onclick="drawColumn(this)">Columnas</a></li>
 						<li><a data-toggle="tab" style="cursor:pointer;" id="{{encuesta.id}}" onclick="drawSemiCircle(this)">Semicírculo</a></li>
 						<li><a data-toggle="tab" style="cursor:pointer;" id="{{encuesta.id}}" onclick="drawPie3d(this)">Círculo 3D</a></li>
 					</ul>
-					<div id="container{{encuesta.id}}"></div>
+					<div id="containerpregunta{{encuesta.id}}"></div>
 				</div>
 		  	</v-pane-content>
 		  </v-pane>	
@@ -105,13 +105,13 @@
 	}
 
 	function drawColumn(tag) {
-		column(datosAct, tag.id);
+		column(datosAct, "pregunta"+tag.id);
 	}
 	function drawSemiCircle(tag){
-		semicircle(datosAct, tag.id);
+		semicircle(datosAct, "pregunta"+tag.id);
 	}
 	function drawPie3d(tag){
-		pie3d(datosAct, tag.id);
+		pie3d(datosAct, "pregunta"+tag.id);
 	}
 	function drawPie(boton) {
 		var datos;
@@ -121,7 +121,7 @@
 			datos = datosAct;
 		}
 		
-		pie(datos, boton.id, "Numero de votos por cada pregunta de esta encuesta");
+		pie(datos, "pregunta"+boton.id, "Numero de votos por cada pregunta de esta encuesta");
 
 	}
 </script>

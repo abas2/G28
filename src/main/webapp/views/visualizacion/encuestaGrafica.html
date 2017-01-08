@@ -7,7 +7,7 @@
 		
 	<div class="col-md-8 text-center" style="padding-top:15px;">
 	
-		<img src="images/img/agora_house.png" class="img-circle" alt="">
+		<img src="images/agora_house.png" class="img-circle" alt="">
 		
 		<div style="margin-top:50px;margin-bottom:50px;">
 		
@@ -31,12 +31,12 @@
 		    <v-pane-content ng-repeat-end="">
 		     	 <div id="representacion">
 					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" style="cursor:pointer;" onclick="drawPie(this)">Circular</a></li>
+						<li class="active"><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawPie(this)">Circular</a></li>
 						<li><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawColumn(this)">Columnas</a></li>
 						<li><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawSemiCircle(this)">Semicírculo</a></li>
 						<li><a data-toggle="tab" style="cursor:pointer;" id="{{pregunta.id}}" onclick="drawPie3d(this)">Círculo 3D</a></li>
 					</ul>
-					<div id="container{{pregunta.id}}"></div>
+					<div id="containerencuesta{{pregunta.id}}"></div>
 				</div>
 		    </v-pane-content>
 		  </v-pane>
@@ -78,13 +78,13 @@
 	}
 
 	function drawColumn(tag) {
-		column(datosAct, tag.id);
+		column(datosAct, "encuesta"+tag.id);
 	}
 	function drawSemiCircle(tag){
-		semicircle(datosAct, tag.id);
+		semicircle(datosAct, "encuesta"+tag.id);
 	}
 	function drawPie3d(tag){
-		pie3d(datosAct, tag.id);
+		pie3d(datosAct, "encuesta"+tag.id);
 	}
 	function drawPie(boton) {
 		var datos;
@@ -94,7 +94,7 @@
 			datos = datosAct;
 		}
 
-		pie(datos, boton.id);
+		pie(datos, "encuesta"+boton.id);
 	}	
 </script>
 <script src="scripts/js/highcharts.js"></script>

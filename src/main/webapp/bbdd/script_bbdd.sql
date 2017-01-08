@@ -112,82 +112,13 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`id`, `version`, `cp`, `pregunta`, `encuesta_id`) VALUES
-(5, 0, '41013', '¬øQui√©n debe de ser el presidente de la comunidad?', 4),
-(6, 0, '41013', '¬øConsideras las cuentas de este a√±o correctas?', 4),
-(7, 0, '41013', '¬øEn general, est√°s satisfecho con el antiguo presidente?', 4),
-(17, 0, '41012', '¬øCual es el mejor juego de nuestra tienda?', 16),
-(22, 0, '41012', '¬øQu√© le parece nuestra politica de precios?', 16),
-(26, 0, '41012', '¬øEn general, como calificarias nuestra tienda?', 16),
-(39, 0, '28052', '¬øQuien deber√≠a de ganar las elecciones?', 38);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `propuesta`
---
-
-CREATE TABLE `propuesta` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `numerosNo` int(11) DEFAULT NULL,
-  `numerosSi` int(11) DEFAULT NULL,
-  `pregunta` varchar(255) DEFAULT NULL,
-  `referendumRecuento_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `question`
---
-
-CREATE TABLE `question` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `text` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `referendumrecuento`
---
-
-CREATE TABLE `referendumrecuento` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `idVotacionModificacion` int(11) NOT NULL,
-  `idVotacionRecuento` int(11) NOT NULL,
-  `nombre` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `survey`
---
-
-CREATE TABLE `survey` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `census` int(11) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `endDate` datetime DEFAULT NULL,
-  `startDate` datetime DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `usernameCreator` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `survey_question`
---
-
-CREATE TABLE `survey_question` (
-  `Survey_id` int(11) NOT NULL,
-  `questions_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(5, 0, '41013', 'øQuiÈn debe de ser el presidente de la comunidad?', 4),
+(6, 0, '41013', 'øConsideras las cuentas de este aÒo correctas?', 4),
+(7, 0, '41013', 'øEn general, est·s satisfecho con el antiguo presidente?', 4),
+(17, 0, '41012', 'øCual es el mejor juego de nuestra tienda?', 16),
+(22, 0, '41012', 'øQuÈ le parece nuestra politica de precios?', 16),
+(26, 0, '41012', 'øEn general, como calificarias nuestra tienda?', 16),
+(39, 0, '28052', 'øQuien deberÌa de ganar las elecciones?', 38);
 
 -- --------------------------------------------------------
 
@@ -233,7 +164,7 @@ INSERT INTO `useraccount_authorities` (`UserAccount_id`, `authority`) VALUES
 (3, 'CUSTOMER');
 
 --
--- √çndices para tablas volcadas
+-- Õndices para tablas volcadas
 --
 
 --
@@ -255,39 +186,6 @@ ALTER TABLE `opcion`
 ALTER TABLE `pregunta`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_qj0l1b5xskt5ulo37no4819k4` (`encuesta_id`);
-
---
--- Indices de la tabla `propuesta`
---
-ALTER TABLE `propuesta`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_7hbharynb2y72557pr80wwqqt` (`referendumRecuento_id`);
-
---
--- Indices de la tabla `question`
---
-ALTER TABLE `question`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `referendumrecuento`
---
-ALTER TABLE `referendumrecuento`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `survey`
---
-ALTER TABLE `survey`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `survey_question`
---
-ALTER TABLE `survey_question`
-  ADD UNIQUE KEY `UK_1vbi74pfjw4o20kgx9408fluh` (`questions_id`),
-  ADD KEY `FK_1vbi74pfjw4o20kgx9408fluh` (`questions_id`),
-  ADD KEY `FK_buc1oj3q6hokh66tm97n4acqa` (`Survey_id`);
 
 --
 -- Indices de la tabla `useraccount`
@@ -317,19 +215,6 @@ ALTER TABLE `opcion`
 --
 ALTER TABLE `pregunta`
   ADD CONSTRAINT `FK_qj0l1b5xskt5ulo37no4819k4` FOREIGN KEY (`encuesta_id`) REFERENCES `encuesta` (`id`);
-
---
--- Filtros para la tabla `propuesta`
---
-ALTER TABLE `propuesta`
-  ADD CONSTRAINT `FK_7hbharynb2y72557pr80wwqqt` FOREIGN KEY (`referendumRecuento_id`) REFERENCES `referendumrecuento` (`id`);
-
---
--- Filtros para la tabla `survey_question`
---
-ALTER TABLE `survey_question`
-  ADD CONSTRAINT `FK_1vbi74pfjw4o20kgx9408fluh` FOREIGN KEY (`questions_id`) REFERENCES `question` (`id`),
-  ADD CONSTRAINT `FK_buc1oj3q6hokh66tm97n4acqa` FOREIGN KEY (`Survey_id`) REFERENCES `survey` (`id`);
 
 --
 -- Filtros para la tabla `useraccount_authorities`
