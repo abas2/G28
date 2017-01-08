@@ -18,9 +18,9 @@ CREATE TABLE `encuesta` (
 --
 
 INSERT INTO `encuesta` (`id`, `version`, `nombre`) VALUES
-(4, 0, 'Encuesta 1'),
-(16, 0, 'Encuesta 2'),
-(38, 0, 'Encuesta 3');
+(1, 0, 'Encuesta 1'),
+(13, 0, 'Encuesta 2'),
+(35, 0, 'Encuesta 3');
 
 -- --------------------------------------------------------
 
@@ -59,39 +59,39 @@ CREATE TABLE `opcion` (
 --
 
 INSERT INTO `opcion` (`id`, `version`, `recuento`, `texto`, `pregunta_id`) VALUES
-(8, 0, 10, 'Manuel', 5),
-(9, 0, 3, 'Juan', 5),
-(10, 0, 0, 'Antonio', 5),
-(11, 0, 20, 'Si', 6),
-(12, 0, 1, 'No', 6),
-(13, 0, 19, 'Si', 7),
-(14, 0, 1, 'No', 7),
-(15, 0, 3, 'NS/NC', 7),
-(18, 0, 40, 'Fifa 2016', 17),
-(19, 0, 2, 'Pro Evolution 2016', 17),
-(20, 0, 77, 'World Of Warcraft', 17),
-(21, 0, 100, 'Call Of Duty', 17),
-(23, 0, 1000, 'Bien, precio correcto', 17),
-(24, 0, 10, 'Mal, en otras tiendas estan mas baratos', 17),
-(25, 0, 100, 'Muy caros', 22),
-(27, 0, 2, '0', 26),
-(28, 0, 5, '1', 26),
-(29, 0, 2, '2', 26),
-(30, 0, 8, '3', 26),
-(31, 0, 2, '4', 26),
-(32, 0, 9, '5', 26),
-(33, 0, 8, '6', 26),
-(34, 0, 4, '7', 26),
-(35, 0, 2, '8', 26),
-(36, 0, 2, '9', 26),
-(37, 0, 1, '10', 26),
-(40, 0, 121, 'PP', 39),
-(41, 0, 95, 'PSOE', 39),
-(42, 0, 75, 'Podemos', 39),
-(43, 0, 40, 'Ciudadanos', 39),
-(44, 0, 4, 'Fifa 2016', 39),
-(45, 0, 1, 'UPyD', 39),
-(46, 0, 40, 'Otros', 39);
+(5, 0, 10, 'Manuel', 2),
+(6, 0, 3, 'Juan', 2),
+(7, 0, 0, 'Antonio', 2),
+(8, 0, 20, 'Si', 3),
+(9, 0, 1, 'No', 3),
+(10, 0, 19, 'Si', 4),
+(11, 0, 1, 'No', 4),
+(12, 0, 3, 'NS/NC', 4),
+(15, 0, 40, 'Fifa 2016', 14),
+(16, 0, 2, 'Pro Evolution 2016', 14),
+(17, 0, 77, 'World Of Warcraft', 14),
+(18, 0, 100, 'Call Of Duty', 14),
+(20, 0, 1000, 'Bien, precio correcto', 14),
+(21, 0, 10, 'Mal, en otras tiendas estan mas baratos', 14),
+(22, 0, 100, 'Muy caros', 19),
+(24, 0, 2, '0', 23),
+(25, 0, 5, '1', 23),
+(26, 0, 2, '2', 23),
+(27, 0, 8, '3', 23),
+(28, 0, 2, '4', 23),
+(29, 0, 9, '5', 23),
+(30, 0, 8, '6', 23),
+(31, 0, 4, '7', 23),
+(32, 0, 2, '8', 23),
+(33, 0, 2, '9', 23),
+(34, 0, 1, '10', 23),
+(37, 0, 121, 'PP', 36),
+(38, 0, 95, 'PSOE', 36),
+(39, 0, 75, 'Podemos', 36),
+(40, 0, 40, 'Ciudadanos', 36),
+(41, 0, 4, 'Fifa 2016', 36),
+(42, 0, 1, 'UPyD', 36),
+(43, 0, 40, 'Otros', 36);
 
 -- --------------------------------------------------------
 
@@ -112,13 +112,13 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`id`, `version`, `cp`, `pregunta`, `encuesta_id`) VALUES
-(5, 0, '41013', 'øQuiÈn debe de ser el presidente de la comunidad?', 4),
-(6, 0, '41013', 'øConsideras las cuentas de este aÒo correctas?', 4),
-(7, 0, '41013', 'øEn general, est·s satisfecho con el antiguo presidente?', 4),
-(17, 0, '41012', 'øCual es el mejor juego de nuestra tienda?', 16),
-(22, 0, '41012', 'øQuÈ le parece nuestra politica de precios?', 16),
-(26, 0, '41012', 'øEn general, como calificarias nuestra tienda?', 16),
-(39, 0, '28052', 'øQuien deberÌa de ganar las elecciones?', 38);
+(2, 0, '41013', '¬øQui√©n debe de ser el presidente de la comunidad?', 1),
+(3, 0, '41013', '¬øConsideras las cuentas de este a√±o correctas?', 1),
+(4, 0, '41013', '¬øEn general, est√°s satisfecho con el antiguo presidente?', 1),
+(14, 0, '41012', '¬øCual es el mejor juego de nuestra tienda?', 13),
+(19, 0, '41012', '¬øQu√© le parece nuestra politica de precios?', 13),
+(23, 0, '41012', '¬øEn general, como calificarias nuestra tienda?', 13),
+(36, 0, '28052', '¬øQuien deber√≠a de ganar las elecciones?', 35);
 
 -- --------------------------------------------------------
 
@@ -133,15 +133,6 @@ CREATE TABLE `useraccount` (
   `username` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `useraccount`
---
-
-INSERT INTO `useraccount` (`id`, `version`, `password`, `username`) VALUES
-(1, 0, '21232f297a57a5a743894a0e4a801fc3', 'admin'),
-(2, 0, '91ec1f9324753048c0096d036a694f86', 'customer'),
-(3, 0, '1b3231655cebb7a1f783eddf27d254ca', 'super');
-
 -- --------------------------------------------------------
 
 --
@@ -154,17 +145,7 @@ CREATE TABLE `useraccount_authorities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `useraccount_authorities`
---
-
-INSERT INTO `useraccount_authorities` (`UserAccount_id`, `authority`) VALUES
-(1, 'ADMIN'),
-(2, 'CUSTOMER'),
-(3, 'ADMIN'),
-(3, 'CUSTOMER');
-
---
--- Õndices para tablas volcadas
+-- √çndices para tablas volcadas
 --
 
 --
