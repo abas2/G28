@@ -46,7 +46,7 @@ public class PreguntaPositiveTest extends AbstractTest {
 	@Test
 	public void testPreguntaContainsOpciones() {
 		Pregunta p;
-		p = preguntaService.findOne(5);
+		p = preguntaService.findOne(2);
 
 		Assert.isTrue(p.getOpcions().size() > 0);
 	}
@@ -54,9 +54,9 @@ public class PreguntaPositiveTest extends AbstractTest {
 	@Test
 	public void testPreguntaContainsOpciones2() {
 		Pregunta p;
-		p = preguntaService.findOne(5);
+		p = preguntaService.findOne(2);
 		Opcion opcion;
-		opcion = opcionService.findOne(8);
+		opcion = opcionService.findOne(5);
 
 		Assert.isTrue(p.getOpcions().contains(opcion));
 	}
@@ -64,14 +64,14 @@ public class PreguntaPositiveTest extends AbstractTest {
 	@Test
 	public void testFindOnePregunta() {
 		Pregunta pregunta;
-		pregunta = preguntaService.findOne(5);
+		pregunta = preguntaService.findOne(2);
 		Assert.isTrue(pregunta.getPregunta().equals("¿Quién debe de ser el presidente de la comunidad?"));
 	}
 
 	@Test
 	public void testCPCorrecto() {
 		Pregunta pregunta;
-		pregunta = preguntaService.findOne(5);
+		pregunta = preguntaService.findOne(2);
 		String codigoPostal = preguntaService.cpToCiudadString(pregunta.getCp());
 		Assert.isTrue(codigoPostal.equals("Sevilla"));
 
@@ -80,10 +80,10 @@ public class PreguntaPositiveTest extends AbstractTest {
 	@Test
 	public void testFindPreguntaByEncuesta() {
 		Pregunta p1;
-		p1 = preguntaService.findOne(5);
+		p1 = preguntaService.findOne(2);
 
 		Encuesta e;
-		e = encuestaService.findOne(4);
+		e = encuestaService.findOne(1);
 
 		Collection<Pregunta> p2;
 		p2 = preguntaService.findPreguntaByEncuesta(e);
