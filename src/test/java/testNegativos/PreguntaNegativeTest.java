@@ -39,7 +39,7 @@ public class PreguntaNegativeTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testCPIncorrecto() {
 		Pregunta pregunta;
-		pregunta = preguntaService.findOne(5);
+		pregunta = preguntaService.findOne(3);
 		String codigoPostal = preguntaService.cpToCiudadString(pregunta.getCp());
 		Assert.isTrue(codigoPostal.equals("Malaga"));
 
@@ -48,14 +48,14 @@ public class PreguntaNegativeTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testFindOnePregunta() {
 		Pregunta pregunta;
-		pregunta = preguntaService.findOne(5);
+		pregunta = preguntaService.findOne(3);
 		Assert.isTrue(pregunta.getPregunta() == "Prueba Mala");
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testPreguntaContainsOpciones() {
 		Pregunta p;
-		p = preguntaService.findOne(40);
+		p = preguntaService.findOne(38);
 
 		Assert.isTrue(p.getOpcions().size() > 0);
 	}
@@ -72,14 +72,14 @@ public class PreguntaNegativeTest extends AbstractTest {
 		Collection<Pregunta> preguntas;
 		preguntas = preguntaService.findPreguntasMasVotadas();
 		Pregunta pregunta;
-		pregunta = preguntaService.findOne(5);
+		pregunta = preguntaService.findOne(3);
 		Assert.isTrue(preguntas.contains(pregunta));
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testFindPreguntaByEncuesta() {
 		Pregunta p1;
-		p1 = preguntaService.findOne(5);
+		p1 = preguntaService.findOne(3);
 
 		Encuesta e;
 		e = encuestaService.findOne(56);
