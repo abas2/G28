@@ -1,13 +1,3 @@
-/* UserAccount.java
- *
- * Copyright (C) 2013 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- * 
- */
-
 package security;
 
 import java.util.ArrayList;
@@ -32,8 +22,6 @@ import domain.DomainEntity;
 @Access(AccessType.PROPERTY)
 public class UserAccount extends DomainEntity implements UserDetails {
 
-	// Constructors -----------------------------------------------------------
-
 	private static final long serialVersionUID = 7254823034213841482L;
 
 	public UserAccount() {
@@ -41,10 +29,6 @@ public class UserAccount extends DomainEntity implements UserDetails {
 
 		this.authorities = new ArrayList<Authority>();
 	}
-
-	// Attributes -------------------------------------------------------------
-
-	// UserDetails interface --------------------------------------------------
 
 	private String username;
 	private String password;
@@ -76,7 +60,6 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	@ElementCollection
 	@Override
 	public Collection<Authority> getAuthorities() {
-		// WARNING: Should return an unmodifiable copy, but it's not possible with hibernate!
 		return authorities;
 	}
 

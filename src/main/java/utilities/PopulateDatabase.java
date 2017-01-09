@@ -1,13 +1,3 @@
-/* PopulateDatabase.java
- *
- * Copyright (C) 2013 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- * 
- */
-
 package utilities;
 
 import java.io.BufferedReader;
@@ -42,41 +32,40 @@ import domain.DomainEntity;
 
 @SuppressWarnings("deprecation")
 public class PopulateDatabase {
-	
+
 	final static String PersistenceUnit = "EGC-Frontend";
-	
-	public static void main(String[] args) throws Throwable {		
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) throws Throwable {
 		ApplicationContext applicationContext;
 		EntityManagerFactory entityManagerFactory;
 		EntityManager entityManager;
 		EntityTransaction entityTransaction;
-		
+
 		applicationContext = new ClassPathXmlApplicationContext("classpath:PopulateDatabase.xml");
-		
+
 		entityManagerFactory = Persistence.createEntityManagerFactory(PersistenceUnit);
-		entityManager = entityManagerFactory.createEntityManager();		
+		entityManager = entityManagerFactory.createEntityManager();
 		entityTransaction = entityManager.getTransaction();
-		
+
 		initialise(entityManagerFactory, entityManager);
-				
-		entityTransaction.begin();		
+
+		entityTransaction.begin();
 		try {
 			for (Entry<String, Object> entry : applicationContext.getBeansWithAnnotation(Entity.class).entrySet()) {
 				String beanName;
 				DomainEntity entity;
-				
+
 				beanName = entry.getKey();
 				entity = (DomainEntity) entry.getValue();
-				entityManager.persist(entity);				
-				System.out.println(String.format("Persisting (%s, %s, %d)",
-						beanName, 
-						entity.getClass().getName(),
+				entityManager.persist(entity);
+				System.out.println(String.format("Persisting (%s, %s, %d)", beanName, entity.getClass().getName(),
 						entity.getId()));
 			}
 			entityTransaction.commit();
 		} catch (Exception oops) {
 			oops.printStackTrace();
-			entityTransaction.rollback();			
+			entityTransaction.rollback();
 		} finally {
 			if (entityManager.isOpen())
 				entityManager.close();
@@ -84,37 +73,39 @@ public class PopulateDatabase {
 				entityManagerFactory.close();
 		}
 	}
-	
+
 	private static String findProperty(EntityManagerFactory entityManagerfactory, String property) {
 		String result;
-		Map<String, Object> properties;		
+		Map<String, Object> properties;
 		Object value;
-		
+
 		properties = entityManagerfactory.getProperties();
 		// for (Entry<String, Object> entry : properties.entrySet())
-		//	System.out.println(String.format("%s = %s", entry.getKey(), entry.getValue()));		
+		// System.out.println(String.format("%s = %s", entry.getKey(),
+		// entry.getValue()));
 		value = properties.get(property);
 		if (value == null)
 			throw new RuntimeException(String.format("Property `%s' not found", property));
 		if (!(value instanceof String))
 			throw new RuntimeException(String.format("Property `%s' is not a string", property));
-		result = (String)value;
+		result = (String) value;
 		if (StringUtils.isBlank(result))
 			throw new RuntimeException(String.format("Property `%s' is blank", property));
 
 		return result;
 	}
 
-	private static void initialise(EntityManagerFactory entityManagerFactory, EntityManager entityManager) throws Throwable {
+	private static void initialise(EntityManagerFactory entityManagerFactory, EntityManager entityManager)
+			throws Throwable {
 		final String urlProperty = "hibernate.connection.url";
 		final String dialectProperty = "hibernate.dialect";
-		
-		final List<String> statements;		
+
+		final List<String> statements;
 		Session session;
 		String databaseUrl;
 		String databaseName;
 		String databaseDialect;
-		
+
 		databaseUrl = findProperty(entityManagerFactory, urlProperty);
 		databaseName = StringUtils.substringAfterLast(databaseUrl, "/");
 		databaseDialect = findProperty(entityManagerFactory, dialectProperty);
@@ -122,20 +113,20 @@ public class PopulateDatabase {
 		System.out.println(String.format("Persistence unit:  `%s'", PersistenceUnit));
 		System.out.println(String.format("Database: `%s' (%s)", databaseName, databaseDialect));
 		System.out.println();
-		
-		statements = buildSchema(databaseName, databaseDialect);				
+
+		statements = buildSchema(databaseName, databaseDialect);
 		session = entityManager.unwrap(Session.class);
-		session.doWork(new Work() {			
+		session.doWork(new Work() {
 			@Override
 			public void execute(Connection connection) throws SQLException {
 				Statement statement;
-				
+
 				statement = connection.createStatement();
 				for (String line : statements) {
-					statement.execute(line);	
-				}				
+					statement.execute(line);
+				}
 			}
-		});		
+		});
 	}
 
 	private static List<String> buildSchema(String databaseName, String databaseDialect) throws Throwable {
@@ -143,59 +134,60 @@ public class PopulateDatabase {
 		File file;
 		String schema;
 		StringBuilder script;
-		
+
 		file = saveSchema(databaseName, databaseDialect);
 		schema = readSchema(file);
-		
+
 		script = new StringBuilder();
 		script.append(String.format("drop database if exists `%s`;\n", databaseName));
 		script.append(String.format("create database `%s`;\n", databaseName));
 		script.append(String.format("use `%s`;\n", databaseName));
 		script.append(schema);
-		
+
 		result = new ArrayList<String>();
 		for (String statement : script.toString().split(";\n")) {
 			if (!StringUtils.isBlank(statement))
 				result.add(statement);
 		}
-		
+
 		return result;
 	}
 
 	private static File saveSchema(String databaseName, String databaseDialect) throws Throwable {
 		File result;
 		Ejb3Configuration ejb3Configuration;
-		Configuration configuration;		
-		SchemaExport schemaExport;		
-				
+		Configuration configuration;
+		SchemaExport schemaExport;
+
 		ejb3Configuration = new Ejb3Configuration().configure(PersistenceUnit, new Properties());
 		configuration = ejb3Configuration.getHibernateConfiguration();
 		configuration.setProperty("hibernate.dialect", databaseDialect);
-		
+
 		result = File.createTempFile("PopulateDatabase", UUID.randomUUID().toString());
-		 
+
 		schemaExport = new SchemaExport(configuration);
 		schemaExport.setDelimiter(";");
 		schemaExport.setFormat(false);
 		schemaExport.setOutputFile(result.getAbsolutePath());
 		schemaExport.setFormat(true);
 		schemaExport.execute(false, false, false, true);
-		
+
 		return result;
 	}
 
+	@SuppressWarnings("resource")
 	private static String readSchema(File file) throws Throwable {
-		StringBuilder result;		
+		StringBuilder result;
 		BufferedReader reader;
 		String line;
-		
+
 		result = new StringBuilder();
 		reader = new BufferedReader(new FileReader(file.getAbsolutePath()));
 		while ((line = reader.readLine()) != null) {
 			result.append(line);
 			result.append('\n');
 		}
-		
+
 		return result.toString();
 	}
 

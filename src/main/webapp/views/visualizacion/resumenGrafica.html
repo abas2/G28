@@ -1,12 +1,32 @@
-<!-- <script src="scripts/js/highcharts.js"></script> -->
-<!-- <script src="scripts/js/highcharts-3d.js"></script> -->
 <script src="scripts/map/highmaps.js"></script>
 <script src="scripts/map/data.js"></script>
 <script src="scripts/map/es-all.js"></script>
 
+<div class="col-md-1"></div>
+<div class="col-md-10" style="margin-bottom:170px;">
+  
+  <div class="col-md-2"></div>
+    
+  <div class="col-md-8 text-center" style="padding-top:15px;">
+  
+    <img src="images/agora_house.png" class="img-circle" alt="">
+    
+    <div style="margin-top:50px;margin-bottom:50px;">
+    
+      <b style="font-size:20px">Frecuencia de preguntas por ciudad</b>
+      <hr style="border: none; height: 1px; color: #333; background-color: #3279b7;">
+    </div>
 
+    <div id="container" style="height:600px;"></div>
 
-<div id="container"></div>
+  
+  </div>
+  
+  <div class="col-md-2"></div>
+  
+</div>
+<div class="col-md-1"></div>
+
 
 <script type="text/javascript">
 $(function () {
@@ -19,18 +39,14 @@ $(function () {
          var cities = Highcharts.geojson(geojson, 'mappoint');
             
 
-       
-
-       
-
 
         // Initiate the chart
         $('#container').highcharts('Map', {
-
-            title : {
-                text : 'Frecuencia de preguntas por ciudad'
-            },
-
+			
+        	 title : {
+                 text : ''
+             },
+             
             mapNavigation: {
                 enabled: true,
                 buttonOptions: {
@@ -96,5 +112,3 @@ $(function () {
     });
 });
 </script>
-
-<!-- <script src="scripts/map/data.js"></script> -->
